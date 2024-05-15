@@ -16,33 +16,28 @@
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.AdvancedLanguageConcepts.Sidebar;
 
     [TestFixture]
-    public class BuildExpressionsArticlePageTests
+    public class BuildExpressionsArticlePageTests : BaseTests
     {
-        private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
         private const string BUILD_EXPRESSIONS_ARTICLE_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/expression-trees/expression-trees-building";
 
         private List<IWebElement>? hyperlinks;
 
-        private IWebDriver driver;
         private CSharpHomePage homePage;
         private LearnToProgramSection learnToProgramSection;
         private AdvancedTopicsSidebar advancedTopicsSidebar;
         private ArticlePage articlePage;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            this.homePage = new CSharpHomePage(this.driver);
-            this.learnToProgramSection = new LearnToProgramSection(this.driver);
-            this.advancedTopicsSidebar = new AdvancedTopicsSidebar(this.driver);
-            this.articlePage = new ArticlePage(this.driver);
-
-            this.driver.Navigate().GoToUrl(C_SHARP_HOMEPAGE_URL);
-            Thread.Sleep(1000);
+            base.SetUp();
+            this.homePage = new CSharpHomePage(base.Driver);
+            this.learnToProgramSection = new LearnToProgramSection(base.Driver);
+            this.advancedTopicsSidebar = new AdvancedTopicsSidebar(base.Driver);
+            this.articlePage = new ArticlePage(base.Driver);
 
             //Arrange
-            this.homePage.ScrollPageToElement(1000);
+            this.homePage.ScrollPageToElement(this.homePage.LearnToProgramSection, 1000);
 
             //Act
             this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.AdvancedLanguageConceptsColumnHyperlinks[2], 1000);
@@ -52,17 +47,16 @@
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
-            this.driver.Quit();
-            this.driver.Dispose();
+            base.Teardown();
         }
 
         [Test]
         public void HomePageHyperlink_ShouldNavigateTo_BuildExpressionsArticlePage()
         {
             //Assert
-            Assert.That(this.driver.Url, Is.EqualTo(BUILD_EXPRESSIONS_ARTICLE_PAGE_URL));
+            Assert.That(base.Driver.Url, Is.EqualTo(BUILD_EXPRESSIONS_ARTICLE_PAGE_URL));
         }
 
         [Test]

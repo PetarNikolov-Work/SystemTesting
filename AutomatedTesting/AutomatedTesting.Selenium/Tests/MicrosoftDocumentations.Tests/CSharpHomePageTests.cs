@@ -7,28 +7,21 @@
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome;
 
     [TestFixture]
-    public class CSharpHomePageTests
+    public class CSharpHomePageTests : BaseTests
     {
-        private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
-
-        private IWebDriver driver;
         private CSharpHomePage homePage;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            this.homePage = new CSharpHomePage(this.driver);
-
-            this.driver.Navigate().GoToUrl(C_SHARP_HOMEPAGE_URL);
-            Thread.Sleep(1000);
+            base.SetUp();
+            this.homePage = new CSharpHomePage(base.Driver);
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
-            this.driver.Quit();
-            this.driver.Dispose();
+           base.Teardown();
         }
 
         [Test]
@@ -38,7 +31,7 @@
             IWebElement learnToProgramSection = this.homePage.LearnToProgramSection;
 
             //Act
-            this.homePage.ScrollPageToElement(2000);
+            this.homePage.ScrollPageToElement(learnToProgramSection, 2000);
 
             //Assert
             Assert.That(learnToProgramSection.Displayed);
@@ -48,7 +41,7 @@
         public void Page_ShouldHave_ProperUrl()
         {
             //Assert
-            Assert.That(this.driver.Url, Is.EqualTo(C_SHARP_HOMEPAGE_URL));
+            Assert.That(base.Driver.Url, Is.EqualTo(C_SHARP_HOMEPAGE_URL));
         }
     }
 }

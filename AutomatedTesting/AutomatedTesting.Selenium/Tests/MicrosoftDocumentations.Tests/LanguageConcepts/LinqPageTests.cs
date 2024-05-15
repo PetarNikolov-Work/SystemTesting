@@ -15,31 +15,26 @@
     using System.Xml.Linq;
 
     [TestFixture]
-    public class LinqPageTests
+    public class LinqPageTests : BaseTests
     {
-        private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
         private const string LINQ_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/linq/";
 
         private List<IWebElement>? hyperlinks;
 
-        private IWebDriver driver;
         private CSharpHomePage homePage;
         private LearnToProgramSection learnToProgramSection;
         private ArticlePage articlePage;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            this.homePage = new CSharpHomePage(this.driver);
-            this.learnToProgramSection = new LearnToProgramSection(this.driver);
-            this.articlePage = new ArticlePage(this.driver);
-
-            this.driver.Navigate().GoToUrl(C_SHARP_HOMEPAGE_URL);
-            Thread.Sleep(1000);
+            base.SetUp();
+            this.homePage = new CSharpHomePage(base.Driver);
+            this.learnToProgramSection = new LearnToProgramSection(base.Driver);
+            this.articlePage = new ArticlePage(base.Driver);
 
             //Arrange
-            this.homePage.ScrollPageToElement(1000);
+            this.homePage.ScrollPageToElement(this.homePage.LearnToProgramSection, 1000);
 
             //Act
             this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
@@ -47,17 +42,16 @@
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
-            this.driver.Quit();
-            this.driver.Dispose();
+            base.Teardown();
         }
 
         [Test]
         public void HomePageHyperlink_ShouldNavigateTo_LinqPage()
         {
             //Assert
-            Assert.That(this.driver.Url, Is.EqualTo(LINQ_PAGE_URL));
+            Assert.That(base.Driver.Url, Is.EqualTo(LINQ_PAGE_URL));
         }
 
         [Test]

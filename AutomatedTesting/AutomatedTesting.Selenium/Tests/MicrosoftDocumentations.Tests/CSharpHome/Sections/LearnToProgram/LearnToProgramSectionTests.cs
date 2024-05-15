@@ -10,35 +10,29 @@
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome.Sections.LearnToProgram;
 
     [TestFixture]
-    public class LearnToProgramSectionTests
+    public class LearnToProgramSectionTests : BaseTests
     {
-        private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
-
         private static readonly int[] positions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
         private List<IWebElement>? hyperlinks;
 
-        private IWebDriver driver;
         private CSharpHomePage homePage;
         private LearnToProgramSection learnToProgramSection;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            this.driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            this.homePage = new CSharpHomePage(this.driver);
-            this.learnToProgramSection = new LearnToProgramSection(this.driver);
+            base.SetUp();
+            this.homePage = new CSharpHomePage(base.Driver);
+            this.learnToProgramSection = new LearnToProgramSection(base.Driver);
 
-            this.driver.Navigate().GoToUrl(C_SHARP_HOMEPAGE_URL);
-            Thread.Sleep(1000);
-            this.homePage.ScrollPageToElement(1000);
+            this.homePage.ScrollPageToElement(this.homePage.LearnToProgramSection, 1000);
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
-            this.driver.Quit();
-            this.driver.Dispose();
+            base.Teardown();
         }
 
         [Test]
@@ -67,7 +61,7 @@
             this.learnToProgramSection.ClickElement(this.hyperlinks[position], 2000);
 
             //Assert
-            Assert.That(this.driver.Url, Is.Not.EqualTo(C_SHARP_HOMEPAGE_URL));
+            Assert.That(base.Driver.Url, Is.Not.EqualTo(C_SHARP_HOMEPAGE_URL));
         }
     }
 }
