@@ -13,10 +13,10 @@
 
         }
 
-        public void ClickElement(IWebElement element, int digit)
+        public void ClickElement(IWebElement element, double milliSeconds)
         {
             element.Click();
-            Thread.Sleep(digit);
+            base.DelayPage(milliSeconds);
         }
     }
 }
