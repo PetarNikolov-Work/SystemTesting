@@ -12,13 +12,13 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#content-well-in-this-article-list > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#content-well-in-this-article-list > li > a")).ToList();
             }
         }
 
         public IWebElement ArticleSection(string articleSectionID)
         {
-            return this.driver.FindElement(By.Id(articleSectionID));
+            return base.FindElement(By.Id(articleSectionID));
         }
     }
 }

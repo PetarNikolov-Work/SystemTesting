@@ -2,23 +2,11 @@
 {
     using OpenQA.Selenium;
     
-    public partial class LearnToProgramSection
+    public partial class LearnToProgramSection: BasePage
     {
-        private IWebDriver driver;
-        private IJavaScriptExecutor jse;
-
-        public LearnToProgramSection(IWebDriver driver)
+        public LearnToProgramSection(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            this.jse = (IJavaScriptExecutor)this.driver;
 
-            this.driver.Manage().Window.Maximize();
-        }
-
-        public void ScrollPageToElement(IWebElement element, int digit)
-        {
-            this.jse.ExecuteScript("arguments[0].scrollIntoView();", element);
-            Thread.Sleep(digit);
         }
 
         public void ClickElement(IWebElement element, int digit)

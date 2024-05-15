@@ -8,7 +8,7 @@
         {
             get
             {
-                return this.driver.FindElement(By.CssSelector("#product-directory .columns"));
+                return base.FindElement(By.CssSelector("#product-directory .columns"));
             }
         }
     }

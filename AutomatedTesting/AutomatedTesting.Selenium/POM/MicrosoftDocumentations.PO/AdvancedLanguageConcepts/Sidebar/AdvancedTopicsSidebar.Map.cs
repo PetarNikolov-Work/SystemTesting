@@ -12,7 +12,7 @@
         {
             get
             {
-                return this.driver.FindElement(By.CssSelector("#title-10-1_3-2 > ul > li:nth-child(6) > a"));
+                return base.FindElement(By.CssSelector("#title-10-1_3-2 > ul > li:nth-child(6) > a"));
             }
         }
     }

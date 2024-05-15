@@ -6,21 +6,11 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    public partial class SidebarTypesSection
+    public partial class SidebarTypesSection : BasePage
     {
-        private IWebDriver driver;
-        private IJavaScriptExecutor jse;
-
-        public SidebarTypesSection(IWebDriver driver)
+        public SidebarTypesSection(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            this.jse = (IJavaScriptExecutor)this.driver;
-        }
 
-        public void ScrollPageToElement(IWebElement element, int digit)
-        {
-            this.jse.ExecuteScript("arguments[0].scrollIntoView();", element);
-            Thread.Sleep(digit);
         }
 
         public void ClickElement(IWebElement element, int digit)

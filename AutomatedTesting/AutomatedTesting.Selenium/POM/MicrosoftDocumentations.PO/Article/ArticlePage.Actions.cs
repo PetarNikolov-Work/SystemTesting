@@ -9,22 +9,16 @@
     using System.Threading.Tasks;
     using static System.Runtime.InteropServices.JavaScript.JSType;
 
-    public partial class ArticlePage
+    public partial class ArticlePage : BasePage
     {
-        private IWebDriver driver;
-        private IJavaScriptExecutor jse;
-        public ArticlePage(IWebDriver driver)
+        public ArticlePage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            this.jse = (IJavaScriptExecutor)this.driver;
 
-            this.driver.Manage().Window.Maximize();
         }
 
         public string GetArticleSectionID(IWebElement element)
         {
-            this.jse.ExecuteScript("arguments[0].scrollIntoView();", element);
-            Thread.Sleep(1000);
+            base.ScrollPageToElement(element, 1000);
             element.Click();
             Thread.Sleep(2000);
 
@@ -32,12 +26,6 @@
             string articleSectionID = hrefAttribute.Substring(hrefAttribute.IndexOf('#') + 1);
 
             return articleSectionID;
-        }
-
-        public void ScrollPageToElement(IWebElement element, int digit)
-        {
-            this.jse.ExecuteScript("arguments[0].scrollIntoView();", element);
-            Thread.Sleep(digit);
         }
     }
 }

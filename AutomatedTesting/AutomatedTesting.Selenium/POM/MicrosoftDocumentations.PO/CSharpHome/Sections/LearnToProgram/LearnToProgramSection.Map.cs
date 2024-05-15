@@ -10,7 +10,7 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#product-cards > div:nth-child(1) > div > ul > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#product-cards > div:nth-child(1) > div > ul > li > a")).ToList();
             }
         }
 
@@ -18,7 +18,7 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#product-cards > div:nth-child(2) > div > ul > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#product-cards > div:nth-child(2) > div > ul > li > a")).ToList();
             }
         }
 
@@ -26,7 +26,7 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#product-cards > div:nth-child(3) > div > ul > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#product-cards > div:nth-child(3) > div > ul > li > a")).ToList();
             }
         }
 
@@ -34,7 +34,7 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#product-cards > div:nth-child(4) > div > ul > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#product-cards > div:nth-child(4) > div > ul > li > a")).ToList();
             }
         }
 
@@ -42,7 +42,7 @@
         {
             get
             {
-                return this.driver.FindElements(By.CssSelector("#product-cards > div > div > ul > li > a")).ToList();
+                return base.FindElements(By.CssSelector("#product-cards > div > div > ul > li > a")).ToList();
             }
         }
     }
