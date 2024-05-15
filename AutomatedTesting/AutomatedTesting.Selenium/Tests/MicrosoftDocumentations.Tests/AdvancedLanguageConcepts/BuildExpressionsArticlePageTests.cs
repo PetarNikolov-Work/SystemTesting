@@ -1,8 +1,9 @@
-﻿namespace AutomatedTesting.Selenium.Tests.MicrosoftDocumentations.Tests.LanguageConcepts
+﻿namespace AutomatedTesting.Selenium.Tests.MicrosoftDocumentations.Tests.AdvancedLanguageConcepts
 {
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.Article;
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome.Sections.LearnToProgram;
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome;
+    using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.TypeSystem.Sidebar;
     using NUnit.Framework;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium;
@@ -12,19 +13,20 @@
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Xml.Linq;
+    using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.AdvancedLanguageConcepts.Sidebar;
 
     [TestFixture]
-    public class LinqPageTests
+    public class BuildExpressionsArticlePageTests
     {
         private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
-        private const string LINQ_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/linq/";
+        private const string BUILD_EXPRESSIONS_ARTICLE_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/expression-trees/expression-trees-building";
 
         private List<IWebElement>? hyperlinks;
 
         private IWebDriver driver;
         private CSharpHomePage homePage;
         private LearnToProgramSection learnToProgramSection;
+        private AdvancedTopicsSidebar advancedTopicsSidebar;
         private ArticlePage articlePage;
 
         [SetUp]
@@ -33,6 +35,7 @@
             this.driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             this.homePage = new CSharpHomePage(this.driver);
             this.learnToProgramSection = new LearnToProgramSection(this.driver);
+            this.advancedTopicsSidebar = new AdvancedTopicsSidebar(this.driver);
             this.articlePage = new ArticlePage(this.driver);
 
             this.driver.Navigate().GoToUrl(C_SHARP_HOMEPAGE_URL);
@@ -42,8 +45,10 @@
             this.homePage.ScrollPageToElement(1000);
 
             //Act
-            this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
-            this.learnToProgramSection.ClickElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
+            this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.AdvancedLanguageConceptsColumnHyperlinks[2], 1000);
+            this.learnToProgramSection.ClickElement(this.learnToProgramSection.AdvancedLanguageConceptsColumnHyperlinks[2], 1000);
+            this.advancedTopicsSidebar.ScrollPageToElement(this.advancedTopicsSidebar.BuildExpressionsHyperlink, 1000);
+            this.advancedTopicsSidebar.ClickElement(this.advancedTopicsSidebar.BuildExpressionsHyperlink, 1000);
         }
 
         [TearDown]
@@ -54,10 +59,10 @@
         }
 
         [Test]
-        public void HomePageHyperlink_ShouldNavigateTo_LinqPage()
+        public void HomePageHyperlink_ShouldNavigateTo_BuildExpressionsArticlePage()
         {
             //Assert
-            Assert.That(this.driver.Url, Is.EqualTo(LINQ_PAGE_URL));
+            Assert.That(this.driver.Url, Is.EqualTo(BUILD_EXPRESSIONS_ARTICLE_PAGE_URL));
         }
 
         [Test]

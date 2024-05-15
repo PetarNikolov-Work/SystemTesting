@@ -1,8 +1,9 @@
-﻿namespace AutomatedTesting.Selenium.Tests.MicrosoftDocumentations.Tests.LanguageConcepts
+﻿namespace AutomatedTesting.Selenium.Tests.MicrosoftDocumentations.Tests.TourOfCSharp
 {
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.Article;
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome.Sections.LearnToProgram;
     using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.CSharpHome;
+    using AutomatedTesting.Selenium.POM.MicrosoftDocumentations.PO.TypeSystem.Sidebar;
     using NUnit.Framework;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium;
@@ -12,13 +13,12 @@
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Xml.Linq;
 
     [TestFixture]
-    public class LinqPageTests
+    public class IntroductionArticlePageTests
     {
         private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
-        private const string LINQ_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/linq/";
+        private const string INTRODUCTION_ARTICLE_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/";
 
         private List<IWebElement>? hyperlinks;
 
@@ -42,8 +42,8 @@
             this.homePage.ScrollPageToElement(1000);
 
             //Act
-            this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
-            this.learnToProgramSection.ClickElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
+            this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.GetStartedColumnHyperlinks[1], 1000);
+            this.learnToProgramSection.ClickElement(this.learnToProgramSection.GetStartedColumnHyperlinks[1], 1000);
         }
 
         [TearDown]
@@ -54,10 +54,10 @@
         }
 
         [Test]
-        public void HomePageHyperlink_ShouldNavigateTo_LinqPage()
+        public void HomePageHyperlink_ShouldNavigateTo_IntroductionArticlePage()
         {
             //Assert
-            Assert.That(this.driver.Url, Is.EqualTo(LINQ_PAGE_URL));
+            Assert.That(this.driver.Url, Is.EqualTo(INTRODUCTION_ARTICLE_PAGE_URL));
         }
 
         [Test]
