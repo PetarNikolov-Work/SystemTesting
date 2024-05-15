@@ -18,6 +18,7 @@
     public class LinqPageTests
     {
         private const string C_SHARP_HOMEPAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/";
+        private const string LINQ_PAGE_URL = "https://learn.microsoft.com/en-us/dotnet/csharp/linq/";
 
         private List<IWebElement>? hyperlinks;
 
@@ -43,6 +44,20 @@
         {
             this.driver.Quit();
             this.driver.Dispose();
+        }
+
+        [Test]
+        public void HomePageHyperlink_ShouldNavigateTo_LinqPage()
+        {
+            //Arrange
+            this.homePage.ScrollPageToElement(1000);
+
+            //Act
+            this.learnToProgramSection.ScrollPageToElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
+            this.learnToProgramSection.ClickElement(this.learnToProgramSection.LanguageConceptsColumnHyperlinks[1], 1000);
+
+            //Assert
+            Assert.That(this.driver.Url, Is.EqualTo(LINQ_PAGE_URL));
         }
 
         [Test]
